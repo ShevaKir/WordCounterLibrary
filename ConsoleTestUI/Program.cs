@@ -14,16 +14,13 @@ namespace ConsoleTestUI
         
         static void Main(string[] args)
         {
-            //List<string> words = new List<string>();
-
             TextParse text = new TextParse(inputTest);
+            WordAnalysis wordAnalysis = new WordAnalysis(text.Words, 4);
 
-            //TwoWords twoWords = new TwoWords(text.Words);
-
-            //foreach (var item in text.GetWordCounts())
-            //{
-            //    Console.WriteLine(item);
-            //}
+            foreach (var item in wordAnalysis.GetTopWordPharse())
+            {
+                Console.WriteLine(item);
+            }
 
             Console.ReadKey();
         }

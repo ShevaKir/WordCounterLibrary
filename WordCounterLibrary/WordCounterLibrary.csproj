@@ -41,13 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICreateCollectionPharse.cs" />
+    <Compile Include="LessThanOneWordException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SingleWord.cs" />
     <Compile Include="TextParse.cs" />
-    <Compile Include="ThreeWord.cs" />
-    <Compile Include="TwoWords.cs" />
-    <Compile Include="Word.cs" />
+    <Compile Include="WordAnalysis.cs" />
     <Compile Include="WordCount.cs" />
   </ItemGroup>
   <ItemGroup>
