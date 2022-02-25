@@ -24,7 +24,7 @@ namespace WordCounterLibrary
                 return _words; 
             } 
         }
-
+        //
         //public IEnumerable<WordCount> GetWordCounts()
         //{
         //    return _words.Select(x => x.ToLower())
