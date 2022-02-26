@@ -13,8 +13,7 @@ namespace WordCounterLibrary
 
         public TextParse(string source)
         {
-            _words = source.Split(_separators, StringSplitOptions.RemoveEmptyEntries);
-           
+            _words = source.Split(_separators, StringSplitOptions.RemoveEmptyEntries);      
         }
 
         public string[] Words 
@@ -24,13 +23,6 @@ namespace WordCounterLibrary
                 return _words; 
             } 
         }
-        //
-        //public IEnumerable<WordCount> GetWordCounts()
-        //{
-        //    return _words.Select(x => x.ToLower())
-        //                 .GroupBy(x => x)
-        //                 .Select(word => new WordCount() { Word = word.Key, Count = word.Count() })
-        //                 .OrderBy(x => x);
-        //}
+        
     }
 }

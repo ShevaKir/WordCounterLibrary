@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordCounterLibrary", "WordC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestUI", "ConsoleTestUI\ConsoleTestUI.csproj", "{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordCounterLibraryTests", "WordCounterLibraryTests\WordCounterLibraryTests.csproj", "{55BC749B-27BD-4F03-B610-A01FD68964ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55BC749B-27BD-4F03-B610-A01FD68964ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55BC749B-27BD-4F03-B610-A01FD68964ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55BC749B-27BD-4F03-B610-A01FD68964ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55BC749B-27BD-4F03-B610-A01FD68964ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
