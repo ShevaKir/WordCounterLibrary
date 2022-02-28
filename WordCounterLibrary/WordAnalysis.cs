@@ -26,7 +26,7 @@ namespace WordCounterLibrary
 
             _inputWords = sourceWord;
             _numberEntries = numberEntries;
-            _phrase = new List<string>(sourceWord.Length - numberEntries - 1);
+            _phrase = new List<string>(sourceWord.Length - (numberEntries - 1));
             CreatePhrase();
         }
 
@@ -34,13 +34,16 @@ namespace WordCounterLibrary
         {
             StringBuilder builderPharse = new StringBuilder();
 
-            for (int i = 0; i < _inputWords.Length - _numberEntries - 1; i++)
+            for (int i = 0; i < _inputWords.Length - (_numberEntries - 1); i++)
             {
                 int count = 0;
                 while (count < _numberEntries)
                 {
                     builderPharse.Append(_inputWords[i + count]);
-                    builderPharse.Append(" ");
+                    if (count < _numberEntries - 1)
+                    {
+                        builderPharse.Append(" ");
+                    }
                     count++;
                 }
                 _phrase.Add(builderPharse.ToString());
