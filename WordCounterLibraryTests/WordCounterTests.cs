@@ -19,8 +19,14 @@ namespace WordCounterLibraryTests
 
             //Act
             TextParse text = new TextParse(source);
-            var actual = text.Words;
             
+            var actual = new List<string>();
+
+            for (int i = 0; i < text.Count; i++)
+            {
+                actual.Add(text[i]);
+            }
+
             //Assert
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -28,7 +34,7 @@ namespace WordCounterLibraryTests
 
         [DataTestMethod]
         [DynamicData(nameof(GetTestStrings), DynamicDataSourceType.Method)]
-        public void ReturnPhrase(int quntilytyPharase, string[] source, IEnumerable<WordCount> expected)
+        public void ReturnPhrase(int quntilytyPharase, IWordIndexer source, IEnumerable<WordCount> expected)
         {
             //Arrange
             WordAnalysis wordAnalysis = new WordAnalysis(source, quntilytyPharase);
@@ -36,28 +42,57 @@ namespace WordCounterLibraryTests
             //Act
             var actual = wordAnalysis.GetTopWordPharse();
 
-            var expected1 = expected.ToArray();
-            var actual1 = actual.ToArray();
-
             //Assert
-            CollectionAssert.AreEqual(expected1, actual1);
+            CollectionAssert.AreEqual(actual.ToArray(), expected.ToArray());
         }
 
-        private static IEnumerable<object?[]> GetTestStrings()
+        private static IEnumerable<object[]> GetTestStrings()
         {
-            yield return new object?[] 
+            yield return new object[] 
             { 
                 1, 
-                new string[]{ "Hello", "my", "dear", "friend" }, 
+                new TextParse("Hello, my dear friend! Hello"), 
                 new List<WordCount>()
                 { 
-                    new WordCount() { Word = "hello", Count = 1 },
+                    new WordCount() { Word = "hello", Count = 2 },
                     new WordCount() { Word = "my", Count = 1 },
                     new WordCount() { Word = "dear", Count = 1 },
                     new WordCount() { Word = "friend", Count = 1 },
                 } 
             };
-            
+
+            yield return new object[]
+            {
+                2,
+                new TextParse("Hello, my dear friend! My dear friend, I am fine"),
+                new List<WordCount>()
+                {
+                    new WordCount() { Word = "my dear", Count = 2 },
+                    new WordCount() { Word = "dear friend", Count = 2 },
+                    new WordCount() { Word = "hello my", Count = 1 },
+                    new WordCount() { Word = "friend my", Count = 1 },
+                    new WordCount() { Word = "friend i", Count = 1 },
+                    new WordCount() { Word = "i am", Count = 1 },
+                    new WordCount() { Word = "am fine", Count = 1 },
+                }
+            };
+
+            yield return new object[]
+            {
+                3,
+                new TextParse("Hello, my dear friend! My dear friend, I am fine"),
+                new List<WordCount>()
+                {
+                    new WordCount() { Word = "my dear friend", Count = 2 },
+                    new WordCount() { Word = "hello my dear", Count = 1 },
+                    new WordCount() { Word = "dear friend my", Count = 1 },
+                    new WordCount() { Word = "friend my dear", Count = 1 },
+                    new WordCount() { Word = "dear friend i", Count = 1 },
+                    new WordCount() { Word = "friend i am", Count = 1 },
+                    new WordCount() { Word = "i am fine", Count = 1 },
+                }
+            };
+
         }
     }
 }
