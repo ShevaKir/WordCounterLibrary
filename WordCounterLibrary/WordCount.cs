@@ -13,6 +13,8 @@ namespace WordCounterLibrary
 
         public int Count { get; set; }
 
+        public double Percent { get; set; }
+
         public int CompareTo(WordCount other)
         {
             if (other == null)
@@ -25,7 +27,8 @@ namespace WordCounterLibrary
 
         public override string ToString()
         {
-            return string.Format("Word: {0}, Count: {1}", Word, Count);
+            return string.Format("Word: {0}, Count: {1}, Percent: {2}%", 
+                    Word, Count, string.Format("{0:N1}", Percent));          
         }
 
         public override int GetHashCode()

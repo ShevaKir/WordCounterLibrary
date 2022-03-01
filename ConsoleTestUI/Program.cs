@@ -16,9 +16,9 @@ namespace ConsoleTestUI
         static void Main(string[] args)
         {
             TextParse text = new TextParse(inputTest);
-            WordAnalysis wordAnalysis = new WordAnalysis(text, 2);
+            WordAnalysis wordAnalysis = new WordAnalysis(text, 1);
 
-            foreach (var item in wordAnalysis.GetTopWordPharse(wordAnalysis.Count))
+            foreach (var item in wordAnalysis.GetTopWordPharse())
             {
                 Console.WriteLine(item);
             }

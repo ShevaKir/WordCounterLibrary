@@ -8,13 +8,14 @@ namespace WordCounterLibrary
 {
     public class WordAnalysis
     {
+        private const int ONE_HUNGRED_PERCENT = 100;
         private const int ENTRIES = 1;
-        //private string[] _inputWords;
         private IWordIndexer _inputWords;
         private int _numberEntries;
         private List<string> _phrase;
+        private IEnumerable<WordCount> _allPhrase;
 
-        public WordAnalysis(IWordIndexer sourceWord, int numberEntries = ENTRIES) // отправлять инумератор
+        public WordAnalysis(IWordIndexer sourceWord, int numberEntries = ENTRIES)
         {
             if(numberEntries < 1)
             {
@@ -25,11 +26,11 @@ namespace WordCounterLibrary
             {
                 throw new NullReferenceException(nameof(sourceWord));
             }
+
             _inputWords = sourceWord;
-            //_inputWords = sourceWord;
             _numberEntries = numberEntries;
-            Count = sourceWord.Count - (numberEntries - 1);
-            _phrase = new List<string>(Count);
+            CountPhrase = sourceWord.Count - (numberEntries - 1);
+            _phrase = new List<string>(CountPhrase);
 
             CreatePhrase();
         }
@@ -55,7 +56,25 @@ namespace WordCounterLibrary
             }
         }
 
-        public int Count { get; }
+        public int CountPhrase { get; }
+
+        private double GetPercentWord(int count)
+        {
+            return (ONE_HUNGRED_PERCENT * count) / (double)CountPhrase;
+        }
+
+        private IEnumerable<WordCount> GetPhrase()
+        {
+            return _phrase.Select(x => x.ToLower())
+                          .GroupBy(x => x)
+                          .Select(word => new WordCount() 
+                          { 
+                              Word = word.Key, 
+                              Count = word.Count(), 
+                              Percent = GetPercentWord(word.Count())
+                          })
+                          .OrderBy(x => x);
+        }
 
         public IEnumerable<WordCount> GetTopWordPharse(int topWord = 0)
         {
@@ -64,17 +83,16 @@ namespace WordCounterLibrary
                 throw new ArgumentOutOfRangeException(nameof(topWord));
             }
 
-            var phrases = _phrase.Select(x => x.ToLower())
-                                 .GroupBy(x => x)
-                                 .Select(word => new WordCount() { Word = word.Key, Count = word.Count() })
-                                 .OrderBy(x => x);
-
             if (topWord != 0)
             {
-                phrases.Take(topWord);
+                _allPhrase = GetPhrase().Take(topWord);
+            }
+            else
+            {
+                _allPhrase = GetPhrase();
             }
 
-            return phrases;
+            return _allPhrase;
         }
     }
 }

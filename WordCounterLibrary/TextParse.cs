@@ -14,6 +14,11 @@ namespace WordCounterLibrary
 
         public TextParse(string source)
         {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
             _words = source.Split(_separators, StringSplitOptions.RemoveEmptyEntries);      
         }
 

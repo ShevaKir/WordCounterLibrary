@@ -7,9 +7,60 @@ using WordCounterLibrary;
 
 namespace WordCounterLibraryTests
 {
+
+
     [TestClass]
     public class WordCounterTests
     {
+        private static IEnumerable<object[]> GetTestStrings()
+        {
+            yield return new object[]
+            {
+                1,
+                new TextParse("Hello, my dear friend! Hello"),
+                new List<WordCount>()
+                {
+                    new WordCount() { Word = "hello", Count = 2 },
+                    new WordCount() { Word = "my", Count = 1 },
+                    new WordCount() { Word = "dear", Count = 1 },
+                    new WordCount() { Word = "friend", Count = 1 },
+                }
+            };
+
+            yield return new object[]
+            {
+                2,
+                new TextParse("Hello, my dear friend! My dear friend, I am fine"),
+                new List<WordCount>()
+                {
+                    new WordCount() { Word = "my dear", Count = 2 },
+                    new WordCount() { Word = "dear friend", Count = 2 },
+                    new WordCount() { Word = "hello my", Count = 1 },
+                    new WordCount() { Word = "friend my", Count = 1 },
+                    new WordCount() { Word = "friend i", Count = 1 },
+                    new WordCount() { Word = "i am", Count = 1 },
+                    new WordCount() { Word = "am fine", Count = 1 },
+                }
+            };
+
+            yield return new object[]
+            {
+                3,
+                new TextParse("Hello, my dear friend! My dear friend, I am fine"),
+                new List<WordCount>()
+                {
+                    new WordCount() { Word = "my dear friend", Count = 2 },
+                    new WordCount() { Word = "hello my dear", Count = 1 },
+                    new WordCount() { Word = "dear friend my", Count = 1 },
+                    new WordCount() { Word = "friend my dear", Count = 1 },
+                    new WordCount() { Word = "dear friend i", Count = 1 },
+                    new WordCount() { Word = "friend i am", Count = 1 },
+                    new WordCount() { Word = "i am fine", Count = 1 },
+                }
+            };
+
+        }
+
         [TestMethod]
         public void ReturnWordsBeforeText()
         {
@@ -46,53 +97,15 @@ namespace WordCounterLibraryTests
             CollectionAssert.AreEqual(actual.ToArray(), expected.ToArray());
         }
 
-        private static IEnumerable<object[]> GetTestStrings()
+        [TestMethod]
+        public void ConstructorTextParseIsArgumentException()
         {
-            yield return new object[] 
-            { 
-                1, 
-                new TextParse("Hello, my dear friend! Hello"), 
-                new List<WordCount>()
-                { 
-                    new WordCount() { Word = "hello", Count = 2 },
-                    new WordCount() { Word = "my", Count = 1 },
-                    new WordCount() { Word = "dear", Count = 1 },
-                    new WordCount() { Word = "friend", Count = 1 },
-                } 
-            };
+            //Arrange
+            string source = null;
 
-            yield return new object[]
-            {
-                2,
-                new TextParse("Hello, my dear friend! My dear friend, I am fine"),
-                new List<WordCount>()
-                {
-                    new WordCount() { Word = "my dear", Count = 2 },
-                    new WordCount() { Word = "dear friend", Count = 2 },
-                    new WordCount() { Word = "hello my", Count = 1 },
-                    new WordCount() { Word = "friend my", Count = 1 },
-                    new WordCount() { Word = "friend i", Count = 1 },
-                    new WordCount() { Word = "i am", Count = 1 },
-                    new WordCount() { Word = "am fine", Count = 1 },
-                }
-            };
-
-            yield return new object[]
-            {
-                3,
-                new TextParse("Hello, my dear friend! My dear friend, I am fine"),
-                new List<WordCount>()
-                {
-                    new WordCount() { Word = "my dear friend", Count = 2 },
-                    new WordCount() { Word = "hello my dear", Count = 1 },
-                    new WordCount() { Word = "dear friend my", Count = 1 },
-                    new WordCount() { Word = "friend my dear", Count = 1 },
-                    new WordCount() { Word = "dear friend i", Count = 1 },
-                    new WordCount() { Word = "friend i am", Count = 1 },
-                    new WordCount() { Word = "i am fine", Count = 1 },
-                }
-            };
-
+            // Act and assert
+            Assert.ThrowsException<System.ArgumentNullException>(() => new TextParse(source));
         }
+
     }
 }
