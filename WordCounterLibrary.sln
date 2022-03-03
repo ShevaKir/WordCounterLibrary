@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordCounterLibrary", "WordCounterLibrary\WordCounterLibrary.csproj", "{17FBA4D4-C93B-45F0-A46D-EE2F74114866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestUI", "ConsoleTestUI\ConsoleTestUI.csproj", "{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordCounterLibraryTests", "WordCounterLibraryTests\WordCounterLibraryTests.csproj", "{55BC749B-27BD-4F03-B610-A01FD68964ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordCounterWebUI", "WordCounterWebUI\WordCounterWebUI.csproj", "{159A1061-09F3-42AF-A9E0-AA49A4A83B0F}"
@@ -21,10 +19,6 @@ Global
 		{17FBA4D4-C93B-45F0-A46D-EE2F74114866}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17FBA4D4-C93B-45F0-A46D-EE2F74114866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17FBA4D4-C93B-45F0-A46D-EE2F74114866}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3612BD2E-8D81-4AE9-BC6A-4F8316E43FA0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55BC749B-27BD-4F03-B610-A01FD68964ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55BC749B-27BD-4F03-B610-A01FD68964ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55BC749B-27BD-4F03-B610-A01FD68964ED}.Release|Any CPU.ActiveCfg = Release|Any CPU

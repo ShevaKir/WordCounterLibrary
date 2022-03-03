@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptWord.cs" />
     <Compile Include="IWordIndexer.cs" />
     <Compile Include="LessThanOneWordException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

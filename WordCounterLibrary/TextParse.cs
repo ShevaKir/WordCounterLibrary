@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WordCounterLibrary
 {
-    public class TextParse : IWordIndexer, IEnumerable<string>
+    public class TextParse : IWordIndexer
     {
         private string[] _words;
         private char[] _separators = new char[] { ' ', '.', ',', '!' };
@@ -26,14 +26,14 @@ namespace WordCounterLibrary
 
         public int Count => _words.Length;
 
-        public IEnumerator<string> GetEnumerator()
-        {
-            return _words.Cast<string>().GetEnumerator();
-        }
+        //public IEnumerator<string> GetEnumerator()
+        //{
+        //    return _words.Cast<string>().GetEnumerator();
+        //}
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return _words.GetEnumerator();
-        }
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return _words.GetEnumerator();
+        //}
     }
 }

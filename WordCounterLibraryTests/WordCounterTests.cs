@@ -12,6 +12,7 @@ namespace WordCounterLibraryTests
     [TestClass]
     public class WordCounterTests
     {
+        #region Data Test
         private static IEnumerable<object[]> GetTestStrings()
         {
             yield return new object[]
@@ -60,6 +61,9 @@ namespace WordCounterLibraryTests
             };
 
         }
+        #endregion
+
+        #region Test TextParse
 
         [TestMethod]
         public void ReturnWordsBeforeText()
@@ -82,6 +86,66 @@ namespace WordCounterLibraryTests
             CollectionAssert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        [DataRow(0, "Hello")]
+        [DataRow(1, "my")]
+        [DataRow(2, "dear")]
+        [DataRow(3, "friend")]
+        public void Indexer_GetElementAtPosition_ShouldReturnString(int index, string expected)
+        {
+            //Arrange
+            var source = "Hello, my dear friend";
+
+            //Act
+            TextParse text = new TextParse(source);
+            var actual = text[index];
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DataRow("Hello", 1)]
+        [DataRow("Hello my", 2)]
+        [DataRow("Hello, my dear", 3)]
+        [DataRow("Hello, my dear friend", 4)]
+        public void Length_Get_ShouldReturnCorrectValue(string source, int expected)
+        {
+            //Act
+            TextParse text = new TextParse(source);
+            var actual = text.Count;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        #endregion
+
+        #region Failure Test TextParse
+
+        [TestMethod]
+        public void CreateTextParse_WithNullString_ShoulThrowArgumentNullException()
+        {
+            //Arrange
+            string source = null;
+
+            // Act and assert
+            Assert.ThrowsException<System.ArgumentNullException>(() => new TextParse(source));
+        }
+
+        [TestMethod]
+        [DataRow(-1)]
+        [DataRow(4)]
+        public void Indexer_SetElementOutOfRange_ShouldThrowArgumentException(int index)
+        {
+            //Arrange
+            TextParse text = new TextParse("Hello, my dear friend");
+
+            //Act and assert
+            Assert.ThrowsException<System.IndexOutOfRangeException>(() => text[index]);
+        }
+
+        #endregion
 
         [DataTestMethod]
         [DynamicData(nameof(GetTestStrings), DynamicDataSourceType.Method)]
@@ -97,15 +161,7 @@ namespace WordCounterLibraryTests
             CollectionAssert.AreEqual(actual.ToArray(), expected.ToArray());
         }
 
-        [TestMethod]
-        public void ConstructorTextParseIsArgumentException()
-        {
-            //Arrange
-            string source = null;
 
-            // Act and assert
-            Assert.ThrowsException<System.ArgumentNullException>(() => new TextParse(source));
-        }
 
     }
 }
