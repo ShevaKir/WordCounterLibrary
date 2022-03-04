@@ -84,6 +84,28 @@ namespace WordCounterLibraryTests
             };
         }
 
+        private static IEnumerable<object[]> GetTestTextForThrowArgumentOutOfRangeException()
+        {
+            yield return new object[]
+            {
+                1,
+                new TextParse("Hello, my dear friend!"),
+                5
+            };
+            yield return new object[]
+            {
+                2,
+                new TextParse("Hello, my dear friend!"),
+                4
+            };
+            yield return new object[]
+            {
+                3,
+                new TextParse("Hello, my dear friend!"),
+                3
+            };
+        }
+
         #endregion
 
         #region Test TextParse
@@ -170,7 +192,6 @@ namespace WordCounterLibraryTests
 
         #endregion
 
-
         #region Test WordAnalysis
 
         [DataTestMethod]
@@ -203,6 +224,55 @@ namespace WordCounterLibraryTests
 
         #endregion
 
+        #region Failure Test WordAnalysis
 
+        [TestMethod]
+        public void CreateWordAnalysis_WithNullIWordIndexer_ShoulThrowNullReferenceException()
+        {
+            //Arrange
+            IWordIndexer wordIndexer = null;
+
+            //Act and assert
+            Assert.ThrowsException<System.NullReferenceException>(() => new WordAnalysis(wordIndexer));
+        }
+
+        [TestMethod]
+        public void CreateWordAnalysis_WithZero_ShoulThrowLessThanOneWordException()
+        {
+            //Arrange
+            int numberEntries = 0;
+
+            //Act and assert
+            Assert.ThrowsException<WordCounterLibrary.LessThanOneWordException>(() => 
+                new WordAnalysis(new TextParse("Hello, my dear friend"), numberEntries));
+        }
+
+        [TestMethod]
+        public void GetTopWords_WithLessZero_ShouldThrowArgumentOutOfRangeException()
+        {
+            //Arrange
+            IWordIndexer words = new TextParse("Hello, my dear friend");
+            int topWords = -1;
+
+            //Act
+            WordAnalysis wordAnalysis = new WordAnalysis(words);
+
+            //Assert
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => wordAnalysis.GetTopWordPharse(topWords));
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(GetTestTextForThrowArgumentOutOfRangeException), DynamicDataSourceType.Method)]
+        public void GetTopWords_WithMoreThanCountPhrase_ShouldThrowArgumentOutOfRangeException
+                (int numberEntries, TextParse source, int topWords)
+        {
+            //Arrange
+            WordAnalysis wordAnalysis = new WordAnalysis(source, numberEntries);
+
+            //Act and Assert
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => wordAnalysis.GetTopWordPharse(topWords));
+        }
+
+        #endregion
     }
 }

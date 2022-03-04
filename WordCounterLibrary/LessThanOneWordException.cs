@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WordCounterLibrary
 {
-    class LessThanOneWordException : Exception
+    public class LessThanOneWordException : Exception
     {
         public LessThanOneWordException()
         {

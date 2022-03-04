@@ -78,7 +78,7 @@ namespace WordCounterLibrary
 
         public IEnumerable<WordCount> GetTopWordPharse(int topWord = 0)
         {
-            if (topWord > _phrase.Count && topWord < 0)
+            if (topWord < 0 || topWord > _phrase.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(topWord));
             }
