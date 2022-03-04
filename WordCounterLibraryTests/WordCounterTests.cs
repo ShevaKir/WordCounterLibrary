@@ -8,7 +8,6 @@ using WordCounterLibrary;
 namespace WordCounterLibraryTests
 {
 
-
     [TestClass]
     public class WordCounterTests
     {
