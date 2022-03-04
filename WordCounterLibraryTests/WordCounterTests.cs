@@ -61,6 +61,29 @@ namespace WordCounterLibraryTests
             };
 
         }
+
+        private static IEnumerable<object[]> GetTestTextForLengthPhrase()
+        {
+            yield return new object[]
+            {
+                1,
+                new TextParse("Hello, my dear friend!"),
+                4
+            };
+            yield return new object[]
+            {
+                2,
+                new TextParse("Hello, my dear friend!"),
+                3
+            };
+            yield return new object[]
+            {
+                3,
+                new TextParse("Hello, my dear friend!"),
+                2
+            };
+        }
+
         #endregion
 
         #region Test TextParse
@@ -147,6 +170,9 @@ namespace WordCounterLibraryTests
 
         #endregion
 
+
+        #region Test WordAnalysis
+
         [DataTestMethod]
         [DynamicData(nameof(GetTestStrings), DynamicDataSourceType.Method)]
         public void ReturnPhrase(int quntilytyPharase, IWordIndexer source, IEnumerable<WordCount> expected)
@@ -161,6 +187,21 @@ namespace WordCounterLibraryTests
             CollectionAssert.AreEqual(actual.ToArray(), expected.ToArray());
         }
 
+        [TestMethod]
+        [DynamicData(nameof(GetTestTextForLengthPhrase), DynamicDataSourceType.Method)]
+        public void LengthPhrase_Get_ShouldReturnCorrectValue(int quntilytyPharase, IWordIndexer source, int expected)
+        {
+            //Arrange
+            WordAnalysis wordAnalysis = new WordAnalysis(source, quntilytyPharase);
+
+            //Act
+            var actual = wordAnalysis.CountPhrase;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        #endregion
 
 
     }
